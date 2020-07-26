@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "declaration": false,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "target": "ES6",
+    "moduleResolution": "Node"
+  }
+}

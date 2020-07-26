@@ -1,0 +1,30 @@
+{
+  "name": "sports-app",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "typescript": "^3.9.7",
+    "jest": "^26.1.0",
+    "@types/jest": "^26.0.7",
+    "ts-jest": "^26.1.3",
+    "@testing-library/dom": "^7.21.4",
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/user-event": "^12.0.14"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build --stream",
+    "migrate:latest": "lerna run migrate:latest --stream --scope api",
+    "migrate:make": "lerna run migrate:make --stream --scope api",
+    "migrate:rollback": "lerna run migrate:rollback --stream --scope api",
+    "postinstall": "npm run bootstrap",
+    "seed:make": "lerna run seed:make --stream --scope api",
+    "seed:run": "lerna run seed:run --stream --scope api",
+    "start:api": "lerna run start --stream --scope api",
+    "start:ui": "lerna run start --stream --scope ui",
+    "test": "jest --no-cache"
+  }
+}
