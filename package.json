@@ -25,6 +25,6 @@
     "seed:run": "lerna run seed:run --stream --scope api",
     "start:api": "lerna run start --stream --scope api",
     "start:ui": "lerna run start --stream --scope ui",
-    "test": "jest --no-cache"
+    "test": "jest"
   }
 }
