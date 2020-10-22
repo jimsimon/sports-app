@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "author": "",
   "license": "ISC",
+  "private": true,
   "dependencies": {
     "lit-element": "^2.3.1"
   },

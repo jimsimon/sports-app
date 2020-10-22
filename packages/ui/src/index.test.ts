@@ -1,13 +1,29 @@
+import '@testing-library/jest-dom'
 import './index.ts'
-import { within } from '@testing-library/dom'
+import { render, html } from 'lit-html'
+import userEvent from '@testing-library/user-event'
 
+let element: HTMLElement
 beforeEach(() => {
-    document.body.innerHTML = `<hello-world></hello-world>`
+    render(html`<hello-world></hello-world>`, document.body)
+    element = document.querySelector('hello-world')
 })
 
-test('it works', () => {
-    const element = document.querySelector('hello-world') as HTMLElement
-    const { getByText } = within(element.shadowRoot.getRootNode() as HTMLElement)
-    const text = getByText('Hello World')
-    expect(text).toBeInTheDocument()
+describe('<hello-world>', () => {
+    test('it works', () => {
+        expect(element.shadowRoot.firstElementChild as HTMLElement).toHaveTextContent('Hello World')
+    })
+
+    test('it works too', () => {
+        const onclick = jest.fn()
+        element.onclick=onclick
+
+        userEvent.click(element.shadowRoot.querySelector('button'))
+        expect(onclick).toHaveBeenCalled()
+    })
+
+    test('isolation', () => {
+        expect(document.querySelectorAll('hello-world')).toHaveLength(1)
+    })
 })
+
