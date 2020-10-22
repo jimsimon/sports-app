@@ -2,11 +2,10 @@ FROM node:latest
 
 WORKDIR /usr/src/app
 
-COPY ./package.json ./package-lock.json lerna.json ./
+COPY ./package.json ./package-lock.json ./tsconfig.json ./
 COPY ./packages/api ./packages/api
 
 RUN npm ci
-RUN npm run bootstrap
 
 ENV NODE_ENV=production
 
