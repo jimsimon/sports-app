@@ -1,11 +1,12 @@
-FROM node:latest
+FROM node:15
 
 WORKDIR /usr/src/app
 
 COPY ./package.json ./package-lock.json ./tsconfig.json ./
 COPY ./packages/api ./packages/api
 
-RUN npm ci
+RUN npm install -g npm@7
+RUN npm install
 
 ENV NODE_ENV=production
 

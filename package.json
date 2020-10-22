@@ -4,6 +4,13 @@
   "description": "",
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "@testing-library/dom": "^7.21.4",
     "@testing-library/jest-dom": "^5.11.1",
@@ -15,18 +22,15 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "build": "lerna run build --stream",
     "build:api": "lerna run build --stream --scope api",
-    "migrate:latest": "lerna run migrate:latest --stream --scope api",
-    "migrate:make": "lerna run migrate:make --stream --scope api",
-    "migrate:rollback": "lerna run migrate:rollback --stream --scope api",
-    "postinstall": "npm run bootstrap",
-    "seed:make": "lerna run seed:make --stream --scope api",
-    "seed:run": "lerna run seed:run --stream --scope api",
+    "build:ui": "lerna run build --stream --scope ui",
     "start": "lerna run start --stream",
     "start:api": "lerna run start --stream --scope api",
     "start:ui": "lerna run start --stream --scope ui",
     "test": "jest"
+  },
+  "prisma": {
+    "schema": "packages/api/prisma/schema.prisma"
   }
 }

@@ -7,14 +7,14 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "pg": "^8.3.0",
-    "apollo-server-express": "^2.16.0",
+    "pg": "^8.4.1",
+    "apollo-server-express": "^2.18.2",
     "@prisma/client": "^2.9.0",
     "@prisma-multi-tenant/client": "^2.3.1",
     "inversify": "^5.0.1"
   },
   "devDependencies": {
-    "ts-node": "^8.10.2",
+    "ts-node": "^9.0.0",
     "@prisma/cli": "^2.9.0",
     "prisma-multi-tenant": "^2.3.1",
     "reflect-metadata": "^0.1.13"
