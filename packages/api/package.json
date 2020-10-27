@@ -11,16 +11,38 @@
     "apollo-server-express": "^2.16.0",
     "@prisma/client": "^2.9.0",
     "@prisma-multi-tenant/client": "^2.3.1",
-    "inversify": "^5.0.1"
+    "inversify": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "bcrypt": "^5.0.0",
+    "type-graphql": "^1.1.0",
+    "class-validator": "^0.12.2"
   },
   "devDependencies": {
     "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0",
     "@prisma/cli": "^2.9.0",
     "prisma-multi-tenant": "^2.3.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "nodemon": "^2.0.6",
+    "@types/bcrypt": "^3.0.0",
+    "@types/jsonwebtoken": "^8.5.0"
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/index.ts"
+    "start": "nodemon",
+    "start:dev": "ts-node-dev src/index.ts",
+    "pmt": "prisma-multi-tenant"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "ts-node src/index.ts",
+    "ext": "ts"
   }
 }

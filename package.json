@@ -15,17 +15,16 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "build": "lerna run build --stream",
     "build:api": "lerna run build --stream --scope api",
     "migrate:latest": "lerna run migrate:latest --stream --scope api",
     "migrate:make": "lerna run migrate:make --stream --scope api",
     "migrate:rollback": "lerna run migrate:rollback --stream --scope api",
-    "postinstall": "npm run bootstrap",
     "seed:make": "lerna run seed:make --stream --scope api",
     "seed:run": "lerna run seed:run --stream --scope api",
     "start": "lerna run start --stream",
     "start:api": "lerna run start --stream --scope api",
+    "start:api:dev": "lerna run start:dev --stream --scope api",
     "start:ui": "lerna run start --stream --scope ui",
     "test": "jest"
   }
