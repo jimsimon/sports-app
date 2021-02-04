@@ -3,7 +3,7 @@ services:
   api:
     build:
       context: .
-    command: npm run start:api
+    command: npm run start:api:dev
     volumes:
       - .:/usr/src/app
     environment:

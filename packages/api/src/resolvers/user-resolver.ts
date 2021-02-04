@@ -1,14 +1,13 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Context } from "./context";
-import { Resolver, Mutation, Query, Args, Ctx } from 'type-graphql';
-import {Credentials, NewUser, User} from "./models/user";
+import { AppContext } from './context';
+import { Credentials, NewUser, User } from './models/user';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 
 @Resolver()
 export class UserResolver {
-
-  @Query(returns => [User])
-  async users(@Ctx() ctx: Context): Promise<User[]> {
+  @Query(() => [User])
+  async users(@Context() ctx: AppContext): Promise<User[]> {
     try {
       return ctx.prisma.user.findMany();
     } catch (error) {
@@ -16,33 +15,39 @@ export class UserResolver {
     }
   }
 
-  @Mutation(returns => String)
-  async signup(@Args() { email, firstName, lastName, password }: NewUser, @Ctx() { prisma }: Context): Promise<String> {
-    const hash = await bcrypt.hash(password, 10)
+  @Mutation(() => String)
+  async signup(
+    @Args() { email, firstName, lastName, password }: NewUser,
+    @Context() { prisma }: AppContext,
+  ): Promise<string> {
+    const hash = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
       data: {
         email,
         firstName,
         lastName,
-        password: hash
-      }
+        password: hash,
+      },
     });
 
-    return jwt.sign(user, "supersecret")
+    return jwt.sign(user, 'supersecret');
   }
 
-  @Mutation(returns => String)
-  async login(@Args() {email, password}: Credentials, @Ctx() { prisma }: Context): Promise<String> {
+  @Mutation(() => String)
+  async login(
+    @Args() { email, password }: Credentials,
+    @Context() { prisma }: AppContext,
+  ): Promise<string> {
     const user = await prisma.user.findOne({
       where: {
-        email
-      }
-    })
+        email,
+      },
+    });
 
     if (!user) throw new Error('Unable to Login');
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new Error('Unable to Login');
 
-    return jwt.sign(user, "supersecret")
+    return jwt.sign(user, 'supersecret');
   }
 }

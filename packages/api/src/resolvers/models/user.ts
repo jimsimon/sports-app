@@ -1,40 +1,40 @@
-import { ObjectType, Field, ID, ArgsType } from "type-graphql"
+import { ObjectType, Field, ID, ArgsType } from '@nestjs/graphql';
 
 @ObjectType()
 export class User {
-  @Field(type => ID)
-  id: number
+  @Field((type) => ID)
+  id: number;
 
   @Field()
-  firstName: string
+  firstName: string;
 
   @Field()
-  lastName: string
+  lastName: string;
 
   @Field()
-  email: string
+  email: string;
 }
 
 @ArgsType()
 export class NewUser {
   @Field()
-  firstName: string
+  firstName: string;
 
   @Field()
-  lastName: string
+  lastName: string;
 
   @Field()
-  email: string
+  email: string;
 
   @Field()
-  password: string
+  password: string;
 }
 
 @ArgsType()
 export class Credentials {
   @Field()
-  email: string
+  email: string;
 
   @Field()
-  password: string
+  password: string;
 }
