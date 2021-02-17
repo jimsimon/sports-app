@@ -1,0 +1,22 @@
+{
+  "name": "@prisma-multi-tenant/client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf ./node_modules ./dist ./src/client",
+    "prebuild": "rimraf ./dist ./src/client",
+    "build": "prisma generate && tsc && cp -r ./src/client ./dist/client && cp -r ./prisma ./dist/prisma"
+  },
+  "devDependencies": {
+    "@prisma/client": "^2.16.1",
+    "prisma": "^2.16.1"
+  },
+  "peerDependencies": {
+    "@prisma/client": ">2"
+  }
+}

@@ -1,0 +1,14 @@
+datasource management {
+  provider = ["postgresql"]
+  url      = env("MANAGEMENT_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/client"
+}
+
+model Tenant {
+  name     String @id
+  host     String
+}

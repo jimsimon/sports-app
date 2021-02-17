@@ -38,7 +38,7 @@ export class UserResolver {
     @Args() { email, password }: Credentials,
     @Context() { prisma }: AppContext,
   ): Promise<string> {
-    const user = await prisma.user.findOne({
+    const user = await prisma.user.findUnique({
       where: {
         email,
       },

@@ -3,5 +3,8 @@
   "packages": [
     "packages/*"
   ],
+  "nohoist": [
+    "@prisma/client"
+  ],
   "version": "1.0.0"
 }

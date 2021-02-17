@@ -11,6 +11,7 @@ services:
       - VIRTUAL_HOST=api.sports-app.docker
       - VIRTUAL_PORT=3000
       - MANAGEMENT_URL=postgresql://postgres@db:5432/sportsapp
+      - local_DATABASE_URL=postgresql://postgres@db:5432/sportsapp
     depends_on:
       - db
 
