@@ -13,7 +13,6 @@ program.command('init').action(() => {
       'migrate',
       'dev',
       '--preview-feature',
-      '--preview-feature',
       '--schema',
       path.join(path.dirname(pmtClientPath), '/prisma/schema.prisma'),
     ],
@@ -93,10 +92,13 @@ program
     });
   });
 
-program.parseAsync(process.argv).catch(console.error);
+program.command('list').action(async () => {
+  const prisma = new PrismaClient();
+  try {
+    console.log(await prisma.tenant.findMany());
+  } finally {
+    await prisma.$disconnect();
+  }
+});
 
-// program.command('list').action(() => {});
-//
-// program.command('new <tenant> <alias>').action(() => {});
-//
-// program.command('migrate <tenant> <cmd>').action(() => {});
+program.parseAsync(process.argv).catch(console.error);
