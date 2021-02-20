@@ -1,15 +1,17 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { AppContext } from './context';
 import { Credentials, NewUser, User } from './models/user';
-import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { PrismaClient } from '@prisma/client';
 
 @Resolver()
 export class UserResolver {
+  constructor(private prisma: PrismaClient) {}
+
   @Query(() => [User])
-  async users(@Context() ctx: AppContext): Promise<User[]> {
+  async users(): Promise<User[]> {
     try {
-      return ctx.prisma.user.findMany();
+      return this.prisma.user.findMany();
     } catch (error) {
       throw error;
     }
@@ -18,10 +20,9 @@ export class UserResolver {
   @Mutation(() => String)
   async signup(
     @Args() { email, firstName, lastName, password }: NewUser,
-    @Context() { prisma }: AppContext,
   ): Promise<string> {
     const hash = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         email,
         firstName,
@@ -34,11 +35,8 @@ export class UserResolver {
   }
 
   @Mutation(() => String)
-  async login(
-    @Args() { email, password }: Credentials,
-    @Context() { prisma }: AppContext,
-  ): Promise<string> {
-    const user = await prisma.user.findUnique({
+  async login(@Args() { email, password }: Credentials): Promise<string> {
+    const user = await this.prisma.user.findUnique({
       where: {
         email,
       },
