@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Credentials, NewUser, User } from './models/user';
+import { Credentials, NewUser, User } from './user';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PrismaClient } from '@prisma/client';
 
