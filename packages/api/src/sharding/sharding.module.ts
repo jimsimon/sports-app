@@ -6,6 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaClient as PMTClient } from '@prisma-multi-tenant/client';
 import { ConfigModule } from '@nestjs/config';
 import { pmtNestJsFactory } from '@prisma-multi-tenant/client';
+import { PmtService } from 'prisma-multi-tenant';
 
 @Module({
   imports: [ConfigModule],
@@ -14,6 +15,7 @@ import { pmtNestJsFactory } from '@prisma-multi-tenant/client';
     prismaFactory,
     PrismaClientFactory,
     pmtNestJsFactory,
+    PmtService,
   ],
   controllers: [ProvisionController],
   exports: [PrismaClient, PmtMiddleware, PrismaClientFactory, PMTClient],

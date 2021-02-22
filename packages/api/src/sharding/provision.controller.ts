@@ -1,17 +1,21 @@
 import {
   Controller,
   Get,
-  Req,
-  InternalServerErrorException,
   Inject,
+  InternalServerErrorException,
+  Req,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { PMT, PrismaClient } from '@prisma-multi-tenant/client';
 import { sample } from 'lodash';
+import { MigrationType, PmtService } from 'prisma-multi-tenant';
 
 @Controller('provision')
 export class ProvisionController {
-  constructor(@Inject(PMT) private prisma: PrismaClient) {}
+  constructor(
+    @Inject(PMT) private prisma: PrismaClient,
+    private pmtService: PmtService,
+  ) {}
 
   @Get()
   async create(@Req() request: Request): Promise<string> {
@@ -46,6 +50,8 @@ export class ProvisionController {
         host: sample(hosts),
       },
     });
+
+    await this.pmtService.migrate(MigrationType.DEPLOY, name);
 
     return `Successfully provisioned ${name}`;
   }
