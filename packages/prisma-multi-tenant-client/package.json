@@ -9,7 +9,7 @@
   "license": "ISC",
   "scripts": {
     "clean": "rimraf ./node_modules ./dist ./src/client",
-    "prebuild": "rimraf ./dist ./src/client",
+    "prebuild": "rimraf ./src/client",
     "build": "prisma generate && tsc && cp -r ./src/client ./dist/client && cp -r ./prisma ./dist/prisma"
   },
   "devDependencies": {
