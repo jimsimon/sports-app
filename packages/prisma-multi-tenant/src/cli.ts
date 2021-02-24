@@ -2,13 +2,22 @@
 
 import { program } from 'commander';
 import { MigrationType, PmtService } from './pmt-service';
+import { PrismaClient } from '@prisma-multi-tenant/client';
 
-const pmtService = new PmtService();
+const prisma = new PrismaClient({
+  log: ['query'],
+});
+const pmtService = new PmtService(prisma);
 
 program.command('init').action(pmtService.init);
 
 const newCmd = program.command('new');
 newCmd.command('tenant <name> <host>').action(pmtService.newTenant);
+
+const deleteCmd = program.command('delete');
+deleteCmd.command('tenant <tenants...>').action((tenants) => {
+  return pmtService.deleteTenants(...tenants);
+});
 
 const migrate = program.command('migrate');
 migrate.command('deploy [tenants...]').action((tenants) => {
@@ -21,4 +30,9 @@ migrate.command('dev [tenants...]').action((tenants) => {
 
 program.command('list').action(pmtService.list);
 
-program.parseAsync(process.argv).catch(console.error);
+program
+  .parseAsync(process.argv)
+  .catch(console.error)
+  .finally(() => {
+    return prisma.$disconnect();
+  });

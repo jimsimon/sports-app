@@ -8,6 +8,8 @@ export enum MigrationType {
 }
 
 export class PmtService {
+  constructor(private prisma: PrismaClient) {}
+
   init() {
     const pmtClientPath = require.resolve('@prisma-multi-tenant/client');
     spawnSync(
@@ -27,33 +29,36 @@ export class PmtService {
   }
 
   async newTenant(name: string, host: string) {
-    const prisma = new PrismaClient();
-    try {
-      await prisma.tenant.create({
-        data: {
-          host,
-          name,
+    await this.prisma.tenant.create({
+      data: {
+        host,
+        name,
+      },
+    });
+  }
+
+  async deleteTenants(...names: string[]) {
+    for (const name of names) {
+      // TODO: Figure out a safer way to inject the schema name :-/
+      await this.prisma.$executeRaw(`DROP SCHEMA IF EXISTS ${name} CASCADE`);
+      await this.prisma.tenant.deleteMany({
+        where: {
+          name: {
+            in: name,
+          },
         },
       });
-    } finally {
-      await prisma.$disconnect();
     }
   }
 
   async migrate(migrationType: MigrationType, ...tenantNames: string[]) {
-    const prisma = new PrismaClient();
-    let tenants;
-    try {
-      tenants = await prisma.tenant.findMany({
-        where: {
-          name: {
-            in: tenantNames.length ? tenantNames : undefined,
-          },
+    const tenants = await this.prisma.tenant.findMany({
+      where: {
+        name: {
+          in: tenantNames.length ? tenantNames : undefined,
         },
-      });
-    } finally {
-      await prisma.$disconnect();
-    }
+      },
+    });
 
     tenants.forEach((tenant: Tenant) => {
       const hostEnvironmentVariable = `${tenant.host}_DATABASE_URL`;
@@ -70,11 +75,6 @@ export class PmtService {
   }
 
   async list() {
-    const prisma = new PrismaClient();
-    try {
-      console.log(await prisma.tenant.findMany());
-    } finally {
-      await prisma.$disconnect();
-    }
+    console.log(await this.prisma.tenant.findMany());
   }
 }
