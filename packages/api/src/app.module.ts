@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { ShardingModule } from './sharding/sharding.module';
 import { PmtMiddleware } from './sharding/sharding.middleware';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getUser(req: express.Request): User {
   const header = req.headers.authorization;
 

@@ -8,7 +8,8 @@
   },
   "scripts": {
     "clean": "rimraf ./dist ./node_modules",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "author": "",
   "private": true,

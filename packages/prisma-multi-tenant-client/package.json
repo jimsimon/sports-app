@@ -10,7 +10,8 @@
   "scripts": {
     "clean": "rimraf ./node_modules ./dist ./src/client",
     "prebuild": "rimraf ./src/client",
-    "build": "prisma generate && tsc && cp -r ./src/client ./dist/client && cp -r ./prisma ./dist/prisma"
+    "build": "prisma generate && tsc && cp -r ./src/client ./dist/client && cp -r ./prisma ./dist/prisma",
+    "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "devDependencies": {
     "@prisma/client": "^2.16.1",

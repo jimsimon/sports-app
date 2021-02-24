@@ -1,6 +1,6 @@
-import { PrismaClient } from "./client";
+import { PrismaClient } from './client';
 
-export * from './client'
+export * from './client';
 
 export const PMT = Symbol();
 

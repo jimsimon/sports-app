@@ -2,6 +2,7 @@ import { ObjectType, Field, ID, ArgsType } from '@nestjs/graphql';
 
 @ObjectType()
 export class User {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @Field((type) => ID)
   id: number;
 
