@@ -7,18 +7,21 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "lit-element": "^2.3.1"
+    "lit-element": "^2.4.0"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^5.2.1",
-    "html-webpack-plugin": "^4.3.0",
-    "webpack": "^4.44.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "@testing-library/dom": "^7.21.4",
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/user-event": "^12.0.14",
+    "@web/dev-server": "0.1.8",
+    "@web/dev-server-esbuild": "0.2.11",
+    "@open-wc/dev-server-hmr": "^0.1.1"
   },
   "scripts": {
     "clean": "rimraf ./dist ./node_modules",
-    "build": "webpack",
-    "start": "webpack-dev-server --watch"
+    "prebuild": "rimraf ./dist",
+    "build": "mkdir ./dist && cp ./src/index.html ./dist/index.html && tsc",
+    "build:watch": "mkdir ./dist && cp ./src/index.html ./dist/index.html && tsc --watch",
+    "start": "web-dev-server --config ./server.config.mjs"
   }
 }

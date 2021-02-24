@@ -1,10 +1,12 @@
-import { LitElement, html, customElement } from 'lit-element'
+import { LitElement, html, customElement, css } from 'lit-element'
 
 @customElement('hello-world')
 class HelloWorldElement extends LitElement {
+    get styles() {
+      return css``;
+    }
+
     render() {
-        return html`<p>Hello World</p><button>Click Me</button>`
+        return html`<p>Hello World!</p><button>Click Me!</button>`
     }
 }
-
-document.body.innerHTML = '<hello-world></hello-world>'
