@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import './index.ts';
+import './index';
 import { render, html } from 'lit-html';
 import userEvent from '@testing-library/user-event';
 
