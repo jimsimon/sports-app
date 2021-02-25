@@ -19,5 +19,7 @@ jobs:
       - name: Fail if there are uncommitted changes
         if: steps.changes.outputs.changed == 1
         run: git status && exit 1
+      - name: Build
+        run: docker-compose run --rm api run build
       - name: Test
         run: docker-compose run --rm api npm run test
