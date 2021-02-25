@@ -29,6 +29,7 @@
     "start:api": "lerna run start --stream --scope api",
     "start:api:dev": "lerna run start:dev --stream --scope api",
     "start:ui": "lerna run start --stream --scope ui",
+    "lint": "lerna run lint --stream",
     "test": "jest"
   }
 }
