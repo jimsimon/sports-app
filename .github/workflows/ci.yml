@@ -5,8 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Build Docker Images
+        run: docker-compose build
       - name: Install
         run: docker-compose run --rm api npm ci
+      - name: Bootstrap
+        run: docker-compose run --rm api npx lerna bootstrap
       - name: Lint
         run: docker-compose run --rm api npm run lint
       - name: Check for uncommitted changes
