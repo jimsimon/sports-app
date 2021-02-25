@@ -14,11 +14,7 @@ jobs:
       - name: Lint
         run: docker-compose run --rm api npm run lint
       - name: Check for uncommitted changes
-        id: changes
-        uses: UnicornGlobal/has-changes-action@v1.0.11
-      - name: Fail if there are uncommitted changes
-        if: steps.changes.outputs.changed == 1
-        run: git status && exit 1
+        run: ./bin/fail-if-git-dirty.sh
       - name: Build
         run: docker-compose run --rm api run build
       - name: Test
