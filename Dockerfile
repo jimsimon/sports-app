@@ -5,8 +5,7 @@ WORKDIR /usr/src/app
 COPY ./package.json ./package-lock.json ./tsconfig.json ./lerna.json ./
 COPY ./packages ./packages
 
-RUN npm ci
-RUN npx lerna bootstrap
+RUN npx lerna bootstrap --ci
 
 ENV NODE_ENV=production
 

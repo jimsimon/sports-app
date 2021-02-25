@@ -7,10 +7,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build Docker Images
         run: docker-compose build
-      - name: Install
-        run: docker-compose run --rm api npm ci
-      - name: Bootstrap
-        run: docker-compose run --rm api npx lerna bootstrap
+      - name: Install and Bootstrap
+        run: docker-compose run --rm api npx lerna bootstrap --ci
       - name: Lint
         run: docker-compose run --rm api npm run lint
       - name: Check for uncommitted changes
