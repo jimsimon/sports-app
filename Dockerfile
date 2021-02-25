@@ -3,7 +3,7 @@ FROM node:14-alpine
 WORKDIR /usr/src/app
 
 COPY ./package.json ./package-lock.json ./tsconfig.json ./lerna.json ./
-COPY ./packages/api ./packages/api
+COPY ./packages ./packages
 
 RUN npm ci
 RUN npx lerna bootstrap
