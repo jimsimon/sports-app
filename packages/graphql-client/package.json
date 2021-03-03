@@ -8,11 +8,17 @@
   "license": "ISC",
   "private": true,
   "devDependencies": {
-    "graphql-zeus": "^3.0.2"
+    "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.4",
+    "@graphql-codegen/cli": "1.21.1",
+    "typescript": "^4.2.2",
+    "@graphql-codegen/typescript": "1.21.0",
+    "@graphql-codegen/typescript-operations": "1.17.14",
+    "@graphql-codegen/typed-document-node": "^1.18.2"
   },
   "scripts": {
     "clean": "rimraf ./dist ./node_modules",
-    "prebuild": "rimraf ./dist",
-    "build": "npx zeus ../api/src/schema.gql ./ -ts && mv ./zeus ./dist"
+    "prebuild": "rimraf ./dist/*",
+    "build": "graphql-codegen && tsc"
   }
 }

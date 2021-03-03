@@ -24,7 +24,7 @@ function getUser(req: express.Request): User {
   imports: [
     ConfigModule.forRoot(),
     GraphQLModule.forRoot({
-      autoSchemaFile: true,
+      autoSchemaFile: 'src/schema.gql',
       sortSchema: true,
     }),
     UserModule,

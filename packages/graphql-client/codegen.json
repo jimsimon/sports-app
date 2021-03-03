@@ -1,0 +1,13 @@
+{
+  "schema": "../api/src/schema.gql",
+  "documents": "src/**/*.graphql",
+  "generates": {
+    "./src/index.ts": {
+      "plugins": [
+        "typescript",
+        "typed-document-node",
+        "typescript-operations"
+      ]
+    }
+  }
+}

@@ -1,10 +1,9 @@
+import { createApolloClient } from '@apollo-elements/lib/create-apollo-client';
 import './components/theme-provider/theme-provider';
-import { LitElement, html, customElement, css } from 'lit-element';
+import './router/router';
 
-@customElement('hello-world')
-export class HelloWorldElement extends LitElement {
-  render() {
-    return html`<p>Hello World!</p>
-      <button>Click Me!</button>`;
-  }
-}
+const client = createApolloClient({
+  uri: 'http://sports-app.docker/graphql',
+  validateVariables: true,
+});
+window.__APOLLO_CLIENT__ = client;

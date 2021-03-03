@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { Credentials, NewUser, User } from './user';
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { PrismaClient } from '@prisma/client';
+import { AuthenticationError } from 'apollo-server-express';
 
 @Resolver()
 export class UserResolver {
@@ -42,9 +43,9 @@ export class UserResolver {
       },
     });
 
-    if (!user) throw new Error('Unable to Login');
+    if (!user) throw new AuthenticationError('Unable to Login');
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) throw new Error('Unable to Login');
+    if (!isMatch) throw new AuthenticationError('Unable to Login');
 
     return jwt.sign(user, 'supersecret');
   }
