@@ -35,14 +35,14 @@
     "rxjs": "^6.6.3",
     "parse-domain": "^3.0.3",
     "pg": "^8.3.0",
-    "@prisma/client": "^2.16.1",
+    "@prisma/client": "^2.21.2",
     "@prisma-multi-tenant/client": "^1.0.0",
     "prisma-multi-tenant": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "bcrypt": "^5.0.0"
   },
   "devDependencies": {
-    "prisma": "^2.16.1",
+    "prisma": "^2.21.2",
     "@types/bcrypt": "^3.0.0",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.168",

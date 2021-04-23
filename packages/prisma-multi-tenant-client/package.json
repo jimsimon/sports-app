@@ -14,8 +14,8 @@
     "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "devDependencies": {
-    "@prisma/client": "^2.16.1",
-    "prisma": "^2.16.1"
+    "@prisma/client": "^2.21.2",
+    "prisma": "^2.21.2"
   },
   "peerDependencies": {
     "@prisma/client": ">2"

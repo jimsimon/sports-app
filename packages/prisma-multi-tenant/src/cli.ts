@@ -12,7 +12,9 @@ const pmtService = new PmtService(prisma);
 program.command('init').action(pmtService.init);
 
 const newCmd = program.command('new');
-newCmd.command('tenant <name> <host>').action(pmtService.newTenant);
+newCmd.command('tenant <name> <host>').action((name, host) => {
+  return pmtService.newTenant(name, host);
+});
 
 const deleteCmd = program.command('delete');
 deleteCmd.command('tenant <tenants...>').action((tenants) => {
